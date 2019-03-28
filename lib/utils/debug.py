@@ -15,3 +15,8 @@ def compare(string1,string2):
     else:
         print(string1)
         print(string2)
+
+def debug_print(string1):
+    print('\n*******************')
+    print(string1)
+    print('\n*******************')
