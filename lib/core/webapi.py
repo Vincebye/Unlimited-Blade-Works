@@ -5,7 +5,8 @@ from lib.core.log import ConsoleLogger
 import pymongo
 from datetime import datetime
 
-scriptPath='/Users/liuzhihong/Dropbox/UBW/script'
+#scriptPath='/Users/liuzhihong/Dropbox/Unlimited-Blade-Works/script'
+scriptPath=os.getcwd()+'/script'
 sys.path.append(scriptPath)
 
 
@@ -18,7 +19,6 @@ class UBW_Scan(object):
         self.conn = pymongo.MongoClient('127.0.0.1', 27017, socketTimeoutMS=3000)
 
     def scan(self):
-        print(sys.path)
         if isinstance(self.target,str):
             result=self.poc_obj.poc(self.target)
             self.save2mongo(self.conn,self.target,self.poc_name,result)

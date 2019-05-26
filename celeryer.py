@@ -1,5 +1,5 @@
 import uuid
-from flask import Flask,request,render_template,redirect,url_for,flash,abort,jsonify
+from flask import Flask,request,render_template,redirect,url_for,flash,abort,jsonify,flash
 import hashlib
 
 from celery import Celery
@@ -14,7 +14,7 @@ from flask_mongoengine import MongoEngine
 import os
 from datetime import datetime
 from lib.utils.cmsdata import cms_dict
-NowPath=os.path.abspath(os.path.dirname(__file__))
+NowPath=os.path.dirname(__file__)
 ScriptPath=NowPath+'/script/'
 app=Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
@@ -22,6 +22,7 @@ app.config['MONGODB_SETTINGS'] = {
     'host': '127.0.0.1',
     'port': 27017
 }
+app.secret_key = 'liuruoxuan'
 
 app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
 app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
@@ -127,6 +128,7 @@ def New_UBW_Task(target,pocname):
 
 @app.route('/index')
 def hello():
+
     success_task_num=0
     tasks=ScanTask.objects.all()
     for i in tasks:
